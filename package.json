@@ -1,0 +1,15 @@
+{
+  "name": "share_link",
+  "type": "module",
+  "main": "index.js",
+  "author": {
+    "name": "Alex Bonetti",
+    "email": "alexosmarbonetti@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex220127/short_link.git"
+  },
+  "homepage": "https://github.com/Alex220127/short_link#readme",
+  "description": "An advanced URL shortener platform featuring secure authentication, customizable short links, expiration and password protection, random aliases, QR code generation, detailed analytics, dashboards, gamification with points and rewards, a benefits store, and link monetization tools."
+}
