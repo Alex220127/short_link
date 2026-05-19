@@ -28,8 +28,11 @@ export default class CreateUserUseCase {
       user_id: userData._id,
       permissions: this.permissionService.getPermissions({ profile: userData.profile })
     }
+
+    const token = await this.tokenRepository.create({ entity: tokenData })
+    tokenData.token_id = token._id
+
     const authToken = this.tokenService.signToken({ token: tokenData })
-    await this.tokenRepository.create({ entity: tokenData })
 
     const data = {
       access_token: authToken

@@ -33,8 +33,11 @@ export default class LoginUseCase {
       user_id: user._id,
       permissions: this.permissionService.getPermissions({ profile: user.profile })
     }
+
+    const token = await this.tokenRepository.create({ entity: tokenData })
+    tokenData.token_id = token._id
+
     const authToken = this.tokenService.signToken({ token: tokenData })
-    await this.tokenRepository.create({ entity: tokenData })
 
     const data = {
       access_token: authToken
