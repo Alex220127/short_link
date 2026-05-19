@@ -12,8 +12,9 @@ export default class CreateUserUseCase {
     this.permissionService = permissionService
   }
 
-  execute = async ({ body }) => {
+  execute = async ({ body, headers }) => {
     body.password = this.hashService.createHash({ content: body.password })
+    body.devices = [ headers['device-id'] ]
     const userData = await this.userRepository.create({ entity: body })
 
     if (!userData) {

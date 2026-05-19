@@ -13,7 +13,7 @@ export default class LoginUseCase {
     this.permissionService = permissionService
   }
 
-  execute = async ({ body }) => {
+  execute = async ({ body, headers }) => {
     const user = await this.userRepository.get({ query: { email: body.email } })
 
     if (!user) {
@@ -39,6 +39,17 @@ export default class LoginUseCase {
     const data = {
       access_token: authToken
     }
+
+    const userUpdate = {
+      $set: {
+        last_access: new Date()
+      },
+      $addToSet: {
+        devices: headers['device-id']
+      }
+    }
+
+    await this.userRepository.update({ query: { _id: user._id }, update: userUpdate })
 
     return { data }
   }

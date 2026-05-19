@@ -15,6 +15,10 @@ export default class Repository {
     return result && this.#toObject({ entity: result })
   }
 
+  update = async ({ query, update }) => {
+    return this.model.updateOne(query, update)
+  }
+
   #toObject = ({ entity }) => {
     try {
       return entity.toObject()

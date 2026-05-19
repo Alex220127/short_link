@@ -3,7 +3,7 @@ import container from '../../infra/container.js'
 
 const createUser = async (request, reply) => {
   try {
-    const { data } = await container.createUserUseCase.execute({ body: request.body })
+    const { data } = await container.createUserUseCase.execute({ body: request.body, headers: request.headers })
 
     return reply.status(EnumHttpCodes.CREATED).send(data)
   } catch (error) {
@@ -18,8 +18,8 @@ const createUser = async (request, reply) => {
 }
 
 const login = async (request, reply) => {
-   try {
-    const { data } = await container.loginUseCase.execute({ body: request.body })
+  try {
+    const { data } = await container.loginUseCase.execute({ body: request.body, headers: request.headers })
 
     return reply.status(EnumHttpCodes.CREATED).send(data)
   } catch (error) {
