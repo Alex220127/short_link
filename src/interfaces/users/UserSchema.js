@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
 const headersDeviceSchema = Joi.object({
-  device_id: Joi.string().required()
+  'device-id': Joi.string().required()
 }).required().unknown()
 
 export default {
