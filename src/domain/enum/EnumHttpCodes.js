@@ -1,4 +1,6 @@
 export default {
   CREATED: 201,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
   UNPROCESSABLE_ENTITY: 422
 }

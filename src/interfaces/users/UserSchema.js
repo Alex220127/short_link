@@ -14,5 +14,12 @@ export default {
       password: Joi.string().required(),
       active: Joi.number().required()
     }).required()
+  }).required(),
+  login: Joi.object({
+    headers: headersDeviceSchema,
+    body: Joi.object({
+      email: Joi.string().email().required(),
+      password: Joi.string().required()
+    }).required()
   }).required()
 }

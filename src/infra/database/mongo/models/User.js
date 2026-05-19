@@ -12,6 +12,7 @@ const UserSchema = new Schema({
   password: String,
   deleted_at: Date,
   last_event: String,
+  last_access: Date,
   suspended_until: Date
 }, {
   collection: 'users',

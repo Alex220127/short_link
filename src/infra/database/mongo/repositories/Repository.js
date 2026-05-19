@@ -9,7 +9,17 @@ export default class Repository {
     return this.#toObject({ entity: result })
   }
 
+  get = async ({ query, projection, options = { lean: true } }) => {
+    const result = await this.model.findOne(query, projection, options)
+
+    return result && this.#toObject({ entity: result })
+  }
+
   #toObject = ({ entity }) => {
-    return entity.toObject()
+    try {
+      return entity.toObject()
+    } catch (error) {
+      return entity
+    }
   }
 }

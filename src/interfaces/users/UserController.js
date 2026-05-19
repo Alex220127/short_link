@@ -17,6 +17,23 @@ const createUser = async (request, reply) => {
   }
 }
 
+const login = async (request, reply) => {
+   try {
+    const { data } = await container.loginUseCase.execute({ body: request.body })
+
+    return reply.status(EnumHttpCodes.CREATED).send(data)
+  } catch (error) {
+    console.log('>> Fail login >> ', error)
+
+    if (error.statusCode) {
+      return reply.code(error.statusCode).send({ message: error.message })
+    }
+
+    throw error
+  }
+}
+
 export default {
+  login,
   createUser
 }
