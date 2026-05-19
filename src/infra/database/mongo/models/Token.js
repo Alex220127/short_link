@@ -8,7 +8,10 @@ const TokenSchema = new Schema({
   permissions: [ String ]
 }, {
   collection: 'tokens',
-  timestamps: true,
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  },
   versionKey: false
 })
 

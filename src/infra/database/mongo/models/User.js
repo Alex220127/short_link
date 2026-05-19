@@ -15,7 +15,10 @@ const UserSchema = new Schema({
   suspended_until: Date
 }, {
   collection: 'users',
-  timestamps: true,
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  },
   versionKey: false
 })
 

@@ -10,6 +10,13 @@ const LinkSchema = new Schema({
   expires_at: Date,
   redirect_to: String,
   protected_by_password: Boolean
+}, {
+  collection: 'links',
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  },
+  versionKey: false
 })
 
 LinkSchema.index({ user_id: 1 })
