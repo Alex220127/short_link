@@ -1,0 +1,27 @@
+import User from './database/mongo/models/User.js'
+import Token from './database/mongo/models/Token.js'
+import Database from './database/mongo/index.js'
+import UserRepository from './database/mongo/repositories/UserRepository.js'
+import TokenRepository from './database/mongo/repositories/TokenRepository.js'
+
+import HashService from '../app/services/auth/HashService.js'
+import TokenService from '../app/services/auth/TokenService.js'
+import PermissionService from '../app/services/auth/PermissionService.js'
+import CreateUserUseCase from '../app/useCases/users/CreateUserUseCase.js'
+
+const createContainer = () => {
+  const database = new Database()
+  const hashService = new HashService()
+  const tokenService = new TokenService()
+  const userRepository = new UserRepository({ model: User })
+  const tokenRepository = new TokenRepository({ model: Token })
+  const permissionService = new PermissionService()
+  const createUserUseCase = new CreateUserUseCase({ hashService, tokenService, userRepository, tokenRepository, permissionService })
+
+  return {
+    database,
+    createUserUseCase
+  }
+}
+
+export default createContainer()
