@@ -9,6 +9,7 @@ import TokenService from '../app/services/auth/TokenService.js'
 import PermissionService from '../app/services/auth/PermissionService.js'
 import LoginUseCase from '../app/useCases/users/LoginUseCase.js'
 import CreateUserUseCase from '../app/useCases/users/CreateUserUseCase.js'
+import GetMyUserUseCase from '../app/useCases/users/GetMyUserUseCase.js'
 
 const createContainer = () => {
   const database = new Database()
@@ -18,6 +19,7 @@ const createContainer = () => {
   const tokenRepository = new TokenRepository({ model: Token })
   const permissionService = new PermissionService()
   const loginUseCase = new LoginUseCase({ hashService, tokenService, userRepository, tokenRepository, permissionService })
+  const getMyUserUseCase = new GetMyUserUseCase({ userRepository })
   const createUserUseCase = new CreateUserUseCase({ hashService, tokenService, userRepository, tokenRepository, permissionService })
 
   return {
@@ -25,6 +27,7 @@ const createContainer = () => {
     loginUseCase,
     tokenService,
     tokenRepository,
+    getMyUserUseCase,
     createUserUseCase
   }
 }

@@ -1,3 +1,5 @@
+import mongoose from 'mongoose'
+
 export default class Repository {
   constructor ({ model }) {
     this.model = model
@@ -17,6 +19,10 @@ export default class Repository {
 
   update = async ({ query, update }) => {
     return this.model.updateOne(query, update)
+  }
+
+  dbId = ({ id }) => {
+    return mongoose.mongo.ObjectId.createFromHexString(id)
   }
 
   #toObject = ({ entity }) => {

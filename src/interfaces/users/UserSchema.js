@@ -4,6 +4,10 @@ const headersDeviceSchema = Joi.object({
   'device-id': Joi.string().required()
 }).required().unknown()
 
+const authHeadersSchema = Joi.object({
+  authorization: Joi.string().required()
+}).required().unknown()
+
 export default {
   createUser: Joi.object({
     headers: headersDeviceSchema,
@@ -21,5 +25,8 @@ export default {
       email: Joi.string().email().required(),
       password: Joi.string().required()
     }).required()
+  }).required(),
+  getMyUser: Joi.object({
+    headers: authHeadersSchema
   }).required()
 }

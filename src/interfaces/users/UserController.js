@@ -33,7 +33,24 @@ const login = async (request, reply) => {
   }
 }
 
+const getMyUser = async (request, reply) => {
+  try {
+    const { data } = await container.getMyUserUseCase.execute({ auth: request.auth })
+
+    return reply.status(EnumHttpCodes.OK).send(data)
+  } catch (error) {
+    console.log('>> Fail get user info >> ', error)
+
+    if (error.statusCode) {
+      return reply.code(error.statusCode).send({ message: error.message })
+    }
+
+    throw error
+  }
+}
+
 export default {
   login,
+  getMyUser,
   createUser
 }
