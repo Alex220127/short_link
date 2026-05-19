@@ -4,7 +4,7 @@ const { MONGO_CONNECT_STRING } = process.env
 
 export default class Database {
   constructor () {
-    isConnecting = null
+    this.isConnecting = null
   }
 
   connect = async () => {
@@ -12,8 +12,9 @@ export default class Database {
       return mongoose
     }
 
-    if (!isConnecting) {
+    if (!this.isConnecting) {
       this.isConnecting = mongoose.connect(MONGO_CONNECT_STRING, {
+        family: 4,
         maxPoolSize: 10,
         connectTimeoutMS: 5000,
         serverSelectionTimeoutMS: 5000
