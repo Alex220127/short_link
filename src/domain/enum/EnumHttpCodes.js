@@ -1,0 +1,4 @@
+export default {
+  CREATED: 201,
+  UNPROCESSABLE_ENTITY: 422
+}
