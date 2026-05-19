@@ -23,6 +23,8 @@ const createContainer = () => {
   return {
     database,
     loginUseCase,
+    tokenService,
+    tokenRepository,
     createUserUseCase
   }
 }

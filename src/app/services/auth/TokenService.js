@@ -4,7 +4,10 @@ const { JWT_SECRET } = process.env
 
 export default class TokenService {
   signToken = ({ token }) => {
-    // console.log({ JWT_SECRET })
     return jwt.sign(token, JWT_SECRET, { expiresIn: '1h' })
+  }
+
+  verifyToken = ({ token }) => {
+    return jwt.verify(token, JWT_SECRET)
   }
 }
