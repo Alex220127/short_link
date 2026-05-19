@@ -16,8 +16,6 @@ export default async ({ request, reply, done }) => {
     request.auth = {
       credentials: decoded
     }
-
-    done()
   } catch (error) {
     return reply.code(EnumHttpCodes.FORBIDDEN).send()
   }

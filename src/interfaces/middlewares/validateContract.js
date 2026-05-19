@@ -1,4 +1,4 @@
-export default ({ request, reply, done, contract }) => {
+export default async ({ request, reply, done, contract }) => {
   const validationKeys = Object.keys(contract.describe().keys)
   const toValidate = {}
 
@@ -15,6 +15,4 @@ export default ({ request, reply, done, contract }) => {
   for (const key of validationKeys) {
     request[key] = value[key]
   }
-
-  done()
 }

@@ -7,12 +7,12 @@ export default [
     url: '/users',
     method: 'POST',
     handler: UserController.createUser,
-    preHandler: (request, reply, done) => validateContract({ request, reply, done, contract: Schema.createUser })
+    preHandler: async (request, reply, done) => await validateContract({ request, reply, done, contract: Schema.createUser })
   },
   {
     url: '/users/login',
     method: 'POST',
     handler: UserController.login,
-    preHandler: (request, reply, done) => validateContract({ request, reply, done, contract: Schema.login })
+    preHandler: async (request, reply, done) => await validateContract({ request, reply, done, contract: Schema.login })
   }
 ]
