@@ -13,10 +13,42 @@ export default async ({ request, reply, done }) => {
       return reply.code(EnumHttpCodes.FORBIDDEN).send()
     }
 
+    const requiredPermissions = request.routeOptions.config.permissions
+    const hasPermission = validatePermissions(requiredPermissions, token.permissions)
+
+    if (!hasPermission) {
+      return reply.code(EnumHttpCodes.FORBIDDEN).send()
+    }
+
     request.auth = {
       credentials: decoded
     }
   } catch (error) {
     return reply.code(EnumHttpCodes.FORBIDDEN).send()
   }
+}
+
+const validatePermissions = (requiredPermissions, permissions) => {
+  if (permissions.includes('*')) {
+    return true
+  }
+
+  const userPermissions = new Set(permissions)
+
+  for (const permission of requiredPermissions) {
+    const hasExactPermission = userPermissions.has(permission)
+
+    if (hasExactPermission) {
+      continue
+    }
+
+    const [ action ] = permission.split(':')
+    const hasAdminPermission = userPermissions.has(`${action}:*`)
+
+    if (!hasAdminPermission) {
+      return false
+    }
+  }
+
+  return true
 }
