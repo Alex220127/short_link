@@ -19,6 +19,11 @@ export default [
   {
     url: '/users/me',
     method: 'GET',
+    config: {
+      permissions: [
+        'user_me:get'
+      ]
+    },
     handler: UserController.getMyUser,
     preHandler: async (request, reply, done) => {
       await authenticationMiddleware({ request, reply, done })
