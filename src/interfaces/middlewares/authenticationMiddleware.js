@@ -13,6 +13,10 @@ export default async ({ request, reply, done }) => {
       return reply.code(EnumHttpCodes.FORBIDDEN).send()
     }
 
+    if (!request.routeOptions.config.scope.includes(token.scope)) {
+      return reply.code(EnumHttpCodes.FORBIDDEN).send()
+    }
+
     const requiredPermissions = request.routeOptions.config.permissions
     const hasPermission = validatePermissions(requiredPermissions, token.permissions)
 
