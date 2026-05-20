@@ -6,6 +6,10 @@ const FeaturedLinkSchema = new Schema({
   active: Boolean,
   sort: Number,
   initial_points: Number,
+  created_by: {
+    user_id: Schema.Types.ObjectId,
+    name: String
+  },
   current_bid: {
     user_id: Schema.Types.ObjectId,
     points: Number,
@@ -22,5 +26,7 @@ const FeaturedLinkSchema = new Schema({
   },
   versionKey: false
 })
+
+FeaturedLinkSchema.index({ code: 1 }, { unique: true })
 
 export default mongoose.models.FeaturedLinkSchema ?? mongoose.model('FeaturedLink', FeaturedLinkSchema)

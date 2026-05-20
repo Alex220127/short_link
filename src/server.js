@@ -3,12 +3,13 @@ import dns from 'node:dns'
 import Fastify from 'fastify'
 import container from './infra/container.js'
 import UserRoutes from './interfaces/users/UserRoutes.js'
+import FeaturedLinksRoutes from './interfaces/featuredLinks/FeaturedLinksRoutes.js'
 
 dns.setServers([ '8.8.8.8', '1.1.1.1' ])
 
 const { PORT } = process.env
 
-const allRoutes = [ ...UserRoutes ]
+const allRoutes = [ ...UserRoutes, ...FeaturedLinksRoutes ]
 
 const fastify = Fastify()
 
