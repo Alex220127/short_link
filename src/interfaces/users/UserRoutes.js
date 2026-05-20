@@ -20,6 +20,7 @@ export default [
     url: '/users/me',
     method: 'GET',
     config: {
+      scope: [ 'user' ],
       permissions: [
         'user_me:get'
       ]
